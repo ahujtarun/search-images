@@ -2,7 +2,33 @@
 <html>
 <head>
     <title>Flickr Image Search</title>
-    <link type="text/css" rel="stylesheet" href="styles.css" >    
+    <link type="text/css" rel="stylesheet" href="styles.css" > 
+    <script type="text/javascript" src="jquery-3.0.0.js"></script>
+    <script type="text/javascript">
+        $("document").ready(function(){
+           $("#searchbutton").click(function(){
+            var inputTag = $("#searchtext").val();
+            var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+               
+               $.getJSON(flickrAPI, {
+                   tags: inputTag,
+                   tagmode: "any",
+                   format: "json"
+               }, successFn);
+           }); 
+        });
+        
+        function successFn(result){
+           $("#searchresults").html("");
+            $.each(result.items, function(i, item){
+               $("<img>").attr("src", item.media.m).appendTo("#searchresults");
+                if(i==100)
+                    {
+                        return false;
+                    }
+            });
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -12,12 +38,15 @@
             </div>
             <div class="column-narrow">
                 <input id="searchtext" type="text" placeholder="Search..">
-                <input type="button" value="Submit">
+                <input id="searchbutton" type="button" value="Submit">
             </div>
         </div>
     </header>
     <main>
-        <div id="searchresults" class="content-wrap"></div>
+        <div class="content-wrap">
+            <div id="searchresults">
+            </div>
+        </div>
     </main>
 </body>
 

@@ -15,7 +15,7 @@ header{
 }
 
 .content-wrap {
-    max-width: 950px;
+    max-width: 1000px;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -28,8 +28,18 @@ header{
   text-align: center;
   font-size: 20px;
 }
+
 .column-narrow {
   width: 30%;
   float: left;
   min-height: 25px;
+}
+
+img  {
+    height: 200px;
+    width: 200px;
+}
+
+#searchresults {
+    margin-top: 10px;
 }
